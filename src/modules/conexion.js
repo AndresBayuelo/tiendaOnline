@@ -15,12 +15,14 @@ async function run(credentials, statement) {
     return result = await statement(connection);
 
   } catch (err) {
+    err.desc = err.toString();
     return err;
   } finally {
     if (connection) {
       try {
         await connection.close();
       } catch (err) {
+        err.desc = err.toString();
         return err;
       }
     }
