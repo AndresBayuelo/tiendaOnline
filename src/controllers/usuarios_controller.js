@@ -9,18 +9,24 @@ const registro = (req, res) => {
 
 const crear = async (req, res) => {
 
+    let user = {};
+    if(req.session.usuario){
+        user = req.session.usuario;
+    }else{
+        user = {username: 'admusrrfs', password: 'secreta'};
+    }
+
     const {cedula, nombre, fechanac, genero, email, usern, psswd} = req.body;
-    const credenciales = {username: 'admusrrfs', password: 'secreta'};
 
     let usuario = new modelUsuario.Usuario(usern, psswd);
-    const usuariodao = new usuarioDAO.UsuarioDAO(credenciales);
+    const usuariodao = new usuarioDAO.UsuarioDAO(user);
     
     let result = await usuariodao.registrar(usuario);
 
     if( !result.exe.errorNum ){
         let cliente = new modelCliente.Cliente(cedula, nombre, fechanac, genero, email);
         cliente.usuario = usern;
-        const clientedao = new clienteDAO.ClienteDAO(credenciales);
+        const clientedao = new clienteDAO.ClienteDAO(user);
         result = await clientedao.registrar(cliente);
         if( result.exe.errorNum ){
             result.drop = await usuariodao.borrarUsuario(usuario.username);
@@ -37,9 +43,6 @@ const acceso = (req, res) => {
 };
 
 const login = async (req, res) => {
-
-    if(req.session.usuario)
-        console.log(req.session.usuario);
     
     const {usern, psswd} = req.body;
     let usuario = new modelUsuario.Usuario(usern, psswd);
