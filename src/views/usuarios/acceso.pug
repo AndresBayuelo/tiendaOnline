@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  div(class='row align-items-center justify-content-sm-center h-100')
+    div(class='col-12 col-sm-10 col-md-8 col-lg-4')
+      div(class='card')
+        h5(class='card-header') Login
+        div(class='card-body')
+          form(action='acceder')
+            
+            div(class="row")
+            
+              div(class='col-12')
+                div(class='form-group')
+                  label(for='usern') Email
+                  input(type='text' id='usern' name='usern' class='form-control')
+            
+              div(class='col-12')
+                div(class='form-group')
+                  label(for='psswd') Contraseña
+                  input(type='password' id='psswd' name='psswd' class='form-control')
+
+            div(class="row")
+
+              div(class='col-12 text-right')
+                button(type="submit" class="btn btn-primary" id="acceder") Acceder
+              
+block scripts
+  script(src='/scripts/usuarios/acceso.js')
