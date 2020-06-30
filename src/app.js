@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/usuarios_routes');
 var ciudadesRouter = require('./routes/ciudades_routes');
 var categoriasRouter = require('./routes/categorias_routes');
+var catalogoRouter = require('./routes/catalogo_routes');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/ciudades', ciudadesRouter);
 app.use('/categorias', categoriasRouter);
+app.use('/catalogo', catalogoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
