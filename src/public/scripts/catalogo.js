@@ -41,33 +41,8 @@ $( document ).ready(function() {
           if (data.exe.hasOwnProperty('errorNum')){
             console.error(data);
           }else{
-            $('#items').empty();
-            for(let i=0; i<data.exe.objects.length; i++){
-
-              let card = $('<div class="card my-2 ml-2" style="width: 16rem; background-color: rgb(252, 227, 0);"></div>');
-              card.append('<div class="card-body"></div>');
-              card.find('.card-body').append('<img class="img-fluid" src="'+data.exe.objects[i].imagen+'">');
-              card.find('.card-body').append('<h5 class="card-title">'+data.exe.objects[i].nombre+'</h5>');
-              card.find('.card-body').append('<p class="card-info">$'+data.exe.objects[i].precio+'</p>');
-              card.find('.card-body').append('<form class="form-inline ml-4"></form>');
-              card.find('.card-body').find('form').append('<div class="form-group mb-2"></div>')
-              card.find('.card-body').find('form').find('div').append('<button class="btn btn-secondary btn-sm ml-3 restarCantidad"> - </button>');
-              card.find('.card-body').find('form').find('div').append('<input type="text" name="labelloco0" class="border border-dark ml-4" style="width: 25px;" value="0">');
-              card.find('.card-body').find('form').find('div').append('<button class="btn btn-secondary btn-sm ml-4 sumarCantidad"> + </button>');
-              card.find('.card-body').find('form').find('div').append('<button class="btn btn-dark mt-1 mx-auto rounded d-block mb-3" marcador="1">Agregar</button>');
-              card.find('.card-body').find('.sumarCantidad').on('click', function(){
-                event.preventDefault();
-                $(this).parent().find('input').val(parseInt($(this).parent().find('input').val())+1);
-              });
-              card.find('.card-body').find('.restarCantidad').on('click', function(){
-                event.preventDefault();
-                $(this).parent().find('input').val(parseInt($(this).parent().find('input').val())-1);
-              });
-              $('#items').append(card);
-
-            }
+            listarProductos(data.exe.objects);
             console.log(data);
-            
           }
         }).fail(function() {
           console.error( "error" );
@@ -76,39 +51,135 @@ $( document ).ready(function() {
 
     $('#buscar').on('click', function (){
       event.preventDefault();
-      console.log($('#formbusqueda').serialize());
       $.get( '/catalogo/listarProductosCriterios', $('#formbusqueda').serialize() )
         .done(function( data ) {
           if (data.exe.hasOwnProperty('errorNum')){
             console.error(data);
           }else{
-            $('#items').empty();
-            for(let i=0; i<data.exe.objects.length; i++){
+            listarProductos(data.exe.objects);
+            console.log(data);
+          }
+        }).fail(function() {
+          console.error( "error" );
+        });
+    });
 
-              let card = $('<div class="card my-2 ml-2" style="width: 16rem; background-color: rgb(252, 227, 0);"></div>');
-              card.append('<div class="card-body"></div>');
-              card.find('.card-body').append('<img class="img-fluid" src="'+data.exe.objects[i].imagen+'">');
-              card.find('.card-body').append('<h5 class="card-title">'+data.exe.objects[i].nombre+'</h5>');
-              card.find('.card-body').append('<p class="card-info">$'+data.exe.objects[i].precio+'</p>');
-              card.find('.card-body').append('<form class="form-inline ml-4"></form>');
-              card.find('.card-body').find('form').append('<div class="form-group mb-2"></div>')
-              card.find('.card-body').find('form').find('div').append('<button class="btn btn-secondary btn-sm ml-3 restarCantidad"> - </button>');
-              card.find('.card-body').find('form').find('div').append('<input type="text" name="labelloco0" class="border border-dark ml-4" style="width: 25px;" value="0">');
-              card.find('.card-body').find('form').find('div').append('<button class="btn btn-secondary btn-sm ml-4 sumarCantidad"> + </button>');
-              card.find('.card-body').find('form').find('div').append('<button class="btn btn-dark mt-1 mx-auto rounded d-block mb-3" marcador="1">Agregar</button>');
-              card.find('.card-body').find('.sumarCantidad').on('click', function(){
-                event.preventDefault();
-                $(this).parent().find('input').val(parseInt($(this).parent().find('input').val())+1);
-              });
-              card.find('.card-body').find('.restarCantidad').on('click', function(){
-                event.preventDefault();
-                $(this).parent().find('input').val(parseInt($(this).parent().find('input').val())-1);
-              });
-              $('#items').append(card);
+    function listarProductos(productos){
+      $('#items').empty();
+      for(let i=0; i<productos.length; i++){
 
+        let card = $('<div class="card col-4" style="background-color: rgb(252, 227, 0);"></div>');
+        card.append('<img class="card-img-top mt-2" style="width:250px; height: 250px" src="'+productos[i].imagen+'">');
+        card.append('<div class="card-body"></div>');
+        card.find('.card-body').append('<h5 class="card-title">'+productos[i].nombre+'</h5>');
+        card.find('.card-body').append('<p class="card-info">$'+productos[i].precio+'</p>');
+        card.find('.card-body').append('<form class="form ml-4"></form>');
+        card.find('.card-body').find('form').append('<div class="form-group mb-2"></div>')
+        card.find('.card-body').find('form').find('div').append('<input type="hidden" name="producto" value="'+productos[i].id+'">');
+        card.find('.card-body').find('form').find('div').append('<input type="hidden" name="precio" value="'+productos[i].precio+'">')
+        card.find('.card-body').find('form').find('div').append('<button class="btn btn-secondary btn-sm ml-3 restarCantidad"> - </button>');
+        card.find('.card-body').find('form').find('div').append('<input type="text" name="cantidad" class="border border-dark ml-4 prodCantidad" style="width: 25px;" value="0">');
+        card.find('.card-body').find('form').find('div').append('<button class="btn btn-secondary btn-sm ml-4 sumarCantidad"> + </button>');
+        card.find('.card-body').find('form').find('div').append('<button class="btn btn-dark mt-1 ml-4 rounded d-block mb-3 agregarProd">Agregar</button>');
+        card.find('.card-body').find('.sumarCantidad').on('click', function(){
+          event.preventDefault();
+          $(this).parent().find('.prodCantidad').val(parseInt($(this).parent().find('.prodCantidad').val())+1);
+        });
+        card.find('.card-body').find('.restarCantidad').on('click', function(){
+          event.preventDefault();
+          $(this).parent().find('.prodCantidad').val(parseInt($(this).parent().find('.prodCantidad').val())-1);
+        });
+        card.find('.agregarProd').on("click", function(){
+          event.preventDefault();
+          $.post( '/pedidocliente/agregarproducto', $(this).parent().parent().serialize() )
+            .done(function( data ) {
+              console.log(data);
+              if (data.exe.hasOwnProperty('errorNum')){
+                console.error(data);
+                alert("Para agregar productos por favor registrese o inicie sesión");
+              }else{
+                cargarCarrito(data.exe.objects.pedido);
+                console.log(data);
+              }
+            }).fail(function() {
+              console.error( "error" );
+            });
+        });
+        $('#items').append(card);
+      }
+    }
+
+    $.get( '/pedidocliente/cargarpedido', {} )
+    .done(function( data ) {
+      if (data.exe.hasOwnProperty('errorNum')){
+        console.error(data);
+      }else{
+        if (data.exe.hasOwnProperty('objects')){
+          cargarCarrito(data.exe.objects.pedido)
+        }
+        console.log(data);
+      }
+    }).fail(function() {
+      console.error( "error" );
+    });
+
+    $('#crearpedido').on("click", function(){
+
+      $.get( '/pedidocliente/crearpedido', {} )
+        .done(function( data ) {
+          if (data.exe.hasOwnProperty('errorNum')){
+            console.error(data);
+          }else{
+            if (data.exe.hasOwnProperty('objects')){
+              cargarCarrito(data.exe.objects.pedido)
             }
             console.log(data);
-            
+          }
+        }).fail(function() {
+          console.error( "error" );
+        });
+
+    });
+
+    function cargarCarrito(pedido){
+
+      $('#carrito').empty();
+        for(let i=0; i<pedido.productos.length; i++){
+          let producto = pedido.productos[i];
+          let tarjeta = $('<li class="list-group-item text-right mx-2"></li>');
+          tarjeta.append('<p>' + producto.nombre + ' x' + producto.cantidad + ' - $' + producto.precio + '</p>');
+          tarjeta.append('<p>total: ' + (producto.cantidad * producto.precio) + '</p>');
+          tarjeta.append('<button class="btn btn-danger mx-4" item="2" style="margin-left: 1rem;" data-idprodpcli="'+producto.id+'" data-cantidad="'+producto.cantidad+'" data-precio="'+producto.precio+'">x</button>');
+          tarjeta.find("button").on("click",function(){
+            event.preventDefault();
+            $.post( '/pedidocliente/quitarproducto', {idprodpcli: $(this).data("idprodpcli"), cantidad: $(this).data("cantidad"), precio: $(this).data("precio"),} )
+              .done(function( data ) {
+                if (data.exe.hasOwnProperty('errorNum')){
+                  console.error(data);
+                }else{
+                  cargarCarrito(data.exe.objects.pedido)
+                  console.log(data);
+                }
+              }).fail(function() {
+                console.error( "error" );
+              });
+          });
+          $('#carrito').append(tarjeta);
+        }
+        $('#stotal').text(pedido.subtotal);
+        $('#iva').text(pedido.iva);
+        $('#total').text(pedido.total);
+
+    }
+
+    $('#boton-vaciar').on("click", function(){
+      $.get( '/pedidocliente/vaciar', {} )
+        .done(function( data ) {
+          if (data.exe.hasOwnProperty('errorNum')){
+            console.error(data);
+          }else{
+            cargarCarrito(data.exe.objects.pedido)
+            console.log(data);
           }
         }).fail(function() {
           console.error( "error" );

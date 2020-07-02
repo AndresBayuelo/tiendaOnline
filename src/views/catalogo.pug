@@ -8,67 +8,76 @@ head
   link(rel='shortcut icon' type='image/x-icon' href='/img/favicon.png')
   link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' rel='stylesheet')
   link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css')
-header#header(style='background-color:rgb(252, 227, 0) ;')
-  .container.mt-2
-    .row
-      .col-md-10
-        .logo-izq
-          img(src='/img/logo.png' alt='logo' width='250' height='136')
-      .col-md-2
-        .info-der
-          a.btn.btn-dark.mt-3.btn-sm(type='button' data-toggle='Iniciar sesión' title='Iniciar sesión' href='/usuarios/acceso') Iniciar sesi&oacute;n
-          br
-          a.btn.btn-dark.mt-3.btn-sm(type='button' data-toggle='Regístrate' title='Regístrate' href='/usuarios/registro') Registrarse
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  a.navbar-brand(href='#') Filtros
-  form#formbusqueda.form-inline
-    .form-group
-      center
-        label(for='listaciudades') Ciudad
-      select#listaciudades.form-control(name='ciudad')
-        option(value='' disabled='' selected='') Selecciona tu ciudad
-        //option(value='1') Bogotá
-    div
+body(style='background-color:black;')
+  header#header(style='background-color:rgb(252, 227, 0) ;')
+    .container.mt-2
+      .row
+        .col-md-10
+          .logo-izq
+            img(src='/img/logo.png' alt='logo' width='250' height='136')
+        .col-md-2
+          .info-der
+            a.btn.btn-dark.mt-3.btn-sm(type='button' data-toggle='Iniciar sesión' title='Iniciar sesión' href='/usuarios/acceso') Iniciar sesi&oacute;n
+            br
+            a.btn.btn-dark.mt-3.btn-sm(type='button' data-toggle='Regístrate' title='Regístrate' href='/usuarios/registro') Registrarse
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    a.navbar-brand(href='#') Filtros
+    form#formbusqueda.form-inline
       .form-group
         center
-          label(for='listacategorias') Categorías
-        select#listacategorias.form-control(name='categoria')
-          option(value='' disabled='' selected='') Categorías
-          //option(value='1') Categoría 1
-          //option(value='2') &nbsp; &nbsp; Subcategoría  1
-    div
-      center
-        label(for='inputState') Ordenar
-      .custom-control.custom-radio.custom-control-inline
-        input#customRadioInline1.custom-control-input(type='radio' name='criterioOrden' value='nombre')
-        label.custom-control-label(for='customRadioInline1') Por nombre
-      .custom-control.custom-radio.custom-control-inline
-        input#customRadioInline2.custom-control-input(type='radio' name='criterioOrden' value='marca')
-        label.custom-control-label(for='customRadioInline2') Por Marca
-      .custom-control.custom-radio.custom-control-inline
-        input#customRadioInline2.custom-control-input(type='radio' name='criterioOrden' value='precio')
-        label.custom-control-label(for='customRadioInline2') Por Precio
-    div.form-inline.my-2.my-lg-0
-      input.form-control.mr-sm-2(type='search' placeholder='Buscar' aria-label='Buscar' name="producto")
-      button#buscar.btn.btn-outline-warning.my-2.my-sm-0(type='submit' data-toggle='Buscar' title='Buscar') Buscar
-.container
-  .row
-    // Elementos generados a partir del JSON
-    main#items.col-sm-9.row(style='background-color: whitesmoke;')
-    // Carrito
-    aside.col-sm-3(style='background-color: azure;')
-      center
-        i.fa.fa-shopping-cart.fa-5x.my-3(style='color:#fbd300;')
-      // Elementos del carrito
-      ul#carrito.list-group
-      hr
-      // Precio total
-      p.text-right
-        | Total:$ ;
-        span#total
-      center
-        button#boton-vaciar.btn.btn-warning Vaciar
-        button#boton-pagar.btn.btn-warning Pagar
+          label(for='listaciudades') Ciudad
+        select#listaciudades.form-control(name='ciudad')
+          option(value='' disabled='' selected='') Selecciona tu ciudad
+          //option(value='1') Bogotá
+      div
+        .form-group
+          center
+            label(for='listacategorias') Categorías
+          select#listacategorias.form-control(name='categoria')
+            option(value='' disabled='' selected='') Categorías
+            //option(value='1') Categoría 1
+            //option(value='2') &nbsp; &nbsp; Subcategoría  1
+      div
+        center
+          label(for='inputState') Ordenar
+        .custom-control.custom-radio.custom-control-inline
+          input#customRadioInline1.custom-control-input(type='radio' name='criterioOrden' value='nombre')
+          label.custom-control-label(for='customRadioInline1') Por nombre
+        .custom-control.custom-radio.custom-control-inline
+          input#customRadioInline2.custom-control-input(type='radio' name='criterioOrden' value='marca')
+          label.custom-control-label(for='customRadioInline2') Por Marca
+        .custom-control.custom-radio.custom-control-inline
+          input#customRadioInline2.custom-control-input(type='radio' name='criterioOrden' value='precio')
+          label.custom-control-label(for='customRadioInline2') Por Precio
+      div.form-inline.my-2.my-lg-0
+        input.form-control.mr-sm-2(type='search' placeholder='Buscar' aria-label='Buscar' name="producto")
+        button#buscar.btn.btn-outline-warning.my-2.my-sm-0(type='submit' data-toggle='Buscar' title='Buscar') Buscar
+  .container(style='background: white;')
+    #seccion.main.row
+      .col-md-9
+        h5(style='text-align: center;')
+        #items.row
+      aside.col-md-3(style='background-color: whitesmoke;')
+        center
+          button#crearpedido.btn.btn-outline-warning.my-2.my-sm-0 Crear carrito
+          hr
+          i.fa.fa-shopping-cart.fa-5x.my-3(style='color:#fbd300;')
+        // Elementos del carrito
+        ul#carrito.list-group
+        hr
+        // Precio total
+        p.text-right
+          | Sub-Total: $
+          span#stotal
+        p.text-right
+          | IVA: $
+          span#iva
+        p.text-right
+          | Total: $
+          span#total
+        center
+          button#boton-vaciar.btn.btn-warning Vaciar
+          button#boton-pagar.btn.btn-warning Pagar
 
 // Optional JavaScript
 // jQuery first, then Popper.js, then Bootstrap JS
