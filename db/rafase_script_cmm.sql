@@ -1,6 +1,10 @@
+
 /* Create Comments */
 
 COMMENT ON TABLE  categoria IS 'Contiene las categorï¿½as y subcategorï¿½as sobre las que estï¿½n clasificados los productos'
+;
+
+COMMENT ON COLUMN  categoria.K_IDCATEGORIA IS 'Identificador de la categorï¿½a'
 ;
 
 COMMENT ON COLUMN  categoria.N_NOMBRE IS 'Nombre de la categorï¿½a'
@@ -12,6 +16,9 @@ COMMENT ON COLUMN  categoria.K_IDCATEGORIAPADRE IS 'Identificador de la categorï
 COMMENT ON TABLE  ciudad IS 'Almacena todas las ciudades donde la cadena de tiendas RAFASE posee sucursales'
 ;
 
+COMMENT ON COLUMN  ciudad.K_IDCIUDAD IS 'Identificador de la ciudad'
+;
+
 COMMENT ON COLUMN  ciudad.N_NOMBRE IS 'Nombre de la ciudad'
 ;
 
@@ -21,7 +28,10 @@ COMMENT ON TABLE  cliente IS 'Contiene la informaciï¿½n principal del cliente re
 COMMENT ON COLUMN  cliente.K_IDCLIENTE IS 'Respresenta el identificador de cada uno de los clientes registrados en el sistema.'
 ;
 
-COMMENT ON COLUMN  cliente.K_CEDULA IS 'Nï¿½mero de identificaciï¿½n propio de cada persona DNI'
+COMMENT ON COLUMN  cliente.I_TIPOIDENT IS 'Tipo de identificaciï¿½n'
+;
+
+COMMENT ON COLUMN  cliente.K_NUMIDENT IS 'Nï¿½mero de identificaciï¿½n propio de cada persona DNI'
 ;
 
 COMMENT ON COLUMN  cliente.N_NOMBRE IS 'Nombre del cliente'
@@ -81,15 +91,6 @@ COMMENT ON COLUMN  direccion.N_DIRECCION IS 'registro de la direccion de la entr
 COMMENT ON COLUMN  direccion.Q_TELEFONO IS 'telefono de contacto asociado al domicilio de la entrega del pedido'
 ;
 
-COMMENT ON TABLE  factura IS 'Tabla factura. Esta tabla representa la factura que visualizara el cliente, al momento de haber concretado la compra que tenia alamcenada en su carrito, pordra visualizar en detalle todos los elemntos que componen su compra.'
-;
-
-COMMENT ON COLUMN  factura.F_FECHAFACTURA IS 'F_FECHAFACTURA: Describe la fecha en que se genera la factura que visualizara el cliente al momento de concretar su compra.'
-;
-
-COMMENT ON COLUMN  factura.K_IDPEDIDOCLIENTE IS 'K_IDPEDIDOCLIENTE: Describe la relaciï¿½n que se tiene con la tabla pedido_cliente, esta descripciï¿½n permite acceder a la informaciï¿½n generada para el pedido una vez se ha concretado por medio de un pago, funciona como FK.'
-;
-
 COMMENT ON TABLE  inventario IS 'Entidad encargada de registrar el numero de productos asociados a una ciudad '
 ;
 
@@ -106,6 +107,15 @@ COMMENT ON COLUMN  inventario.K_IDREFERENCIAUNICA IS 'identificador de referenci
 ;
 
 COMMENT ON COLUMN  inventario.K_IDCIUDAD IS 'Ciudad asociada al producto en el inventario'
+;
+
+COMMENT ON TABLE  inventario_proveedor IS 'Asocia los productos que puede suministrar un proveedor en determinada ciudad'
+;
+
+COMMENT ON COLUMN  inventario_proveedor.K_IDINVENTARIO IS 'Identificador del producto'
+;
+
+COMMENT ON COLUMN  inventario_proveedor.K_IDPROVEEDOR IS 'Identificador del proveedor'
 ;
 
 COMMENT ON TABLE  pago IS 'Entidad que registra el proceso de pago realizado por el usuario'
@@ -159,16 +169,16 @@ COMMENT ON COLUMN  pago_tarjetacredito.K_IDPAGO IS 'Identificador del pago al cu
 COMMENT ON COLUMN  pago_tarjetacredito.K_IDTARJETACREDITO IS 'Identificador de la tarjeta de crï¿½dito con la cual se esta realizando el pago'
 ;
 
-COMMENT ON TABLE  parametro_pedidocliente IS 'Tabla parametro_pedidocliente Represeenta el tiempo en que el pedido de un cliente puede permanecer sin pagar, luego de cierto nï¿½mero de horas en esta tabla, el carrito del cliente es eliminado.'
+COMMENT ON TABLE  parametro IS 'Tabla de parï¿½metros, donde se especifican distintas parametrizaciones del sistema'
 ;
 
-COMMENT ON COLUMN  parametro_pedidocliente.F_FECHA IS 'F_FECHA: Describe la fecha en que se presentan la ultima modificaciï¿½n del pedido del cliente, a partir de esta, se inicia un conteo de horas, en el atributo Q_DURACIONPEDIDO con la cual si se excede el nï¿½mero de horas, el carrito se borarï¿½. '
+COMMENT ON COLUMN  parametro.F_FECHA IS 'Fecha en que se establece el parï¿½metro'
 ;
 
-COMMENT ON COLUMN  parametro_pedidocliente.Q_DURACIONPEDIDO IS 'Q_DURACIONPEDIDO: Describe el nï¿½mero de horas que han pasado antes de que un carrito pueda ser eliminado.'
+COMMENT ON COLUMN  parametro.N_NOMBRE IS 'Nombre del parï¿½metro'
 ;
 
-COMMENT ON COLUMN  parametro_pedidocliente.K_IDPEDIDOCLIENTE IS 'K_IDPEDIDOCLIENTE: Representa la FK generada entre la tabla parametro_pedidocliente con la tabla pedido_cliente.'
+COMMENT ON COLUMN  parametro.Q_VALOR IS 'Valor del parï¿½metro'
 ;
 
 COMMENT ON TABLE  pedido_cliente IS 'Relaciona toda la informaciï¿½n acerca del pedido del cliente, su direcciï¿½n, sus prductos, su cantidad, las fechas en que se creï¿½ y finalizï¿½ el carrito de compras y la fecha en que el pedido fue entregado en el domicilio del cliente'
@@ -210,19 +220,10 @@ COMMENT ON COLUMN  pedido_cliente.V_VALORTOTAL IS 'Costo total del pedido, relac
 COMMENT ON COLUMN  pedido_cliente.V_IVA IS 'Impuesto de valor agregado'
 ;
 
-COMMENT ON TABLE  pedido_proveedor IS 'Muestra los proveedores que suministran pedidos a cada ciudad'
-;
-
-COMMENT ON COLUMN  pedido_proveedor.F_FECHA IS 'Fecha en que se solicitï¿½ el pedido al proveedor'
-;
-
-COMMENT ON COLUMN  pedido_proveedor.K_IDPROVEEDOR IS 'Identificdor del proveedor al que se le hizo el pedido'
-;
-
-COMMENT ON COLUMN  pedido_proveedor.K_IDCIUDAD IS 'Identificador de la ciudad donde se solicitï¿½ el pedido'
-;
-
 COMMENT ON TABLE  producto IS 'Tabla que almacena los productos ofrecidos por la cadena de tiendas'
+;
+
+COMMENT ON COLUMN  producto.K_IDREFERENCIAUNICA IS 'Numero de referencia que identifica a un producto'
 ;
 
 COMMENT ON COLUMN  producto.N_NOMBRE IS 'Nombre del producto'
@@ -249,40 +250,13 @@ COMMENT ON COLUMN  producto_pedidocliente.K_IDPRODUCTOPEDIDOCLIENTE IS 'Identifi
 COMMENT ON COLUMN  producto_pedidocliente.K_IDPEDIDOCLIENTE IS 'Identificador del pedido del cliente'
 ;
 
-COMMENT ON COLUMN  producto_pedidocliente.K_IDREFERENCIAUNICA IS 'Referencia del producto'
+COMMENT ON COLUMN  producto_pedidocliente.K_IDINVENTARIO IS 'Referencia del producto en el inventario'
 ;
 
 COMMENT ON COLUMN  producto_pedidocliente.Q_CANTIDAD IS 'Cantidad del producto'
 ;
 
 COMMENT ON COLUMN  producto_pedidocliente.V_PRECIO IS 'Precio de la cantidad de productos'
-;
-
-COMMENT ON TABLE  producto_pedidoproveedor IS 'Tabla producto_pedidoproveedor Esta tabla se encarga de establecer la relaciï¿½n entre los productos que necesta la tienda para abastecerse y  los porveedores que facilitan dichos productos.'
-;
-
-COMMENT ON COLUMN  producto_pedidoproveedor.Q_CANTIDAD IS 'Q_CANTIDAD: Describe el nï¿½mero de productos que se le solicitan alos proveedores, se permiten decimales ya que se pueden solicitar elementos de canasta familiar no enteros.'
-;
-
-COMMENT ON COLUMN  producto_pedidoproveedor.V_PRECIO IS 'V_PRECIO: Describe el precio que tienen los productos solicitados al proveedor.'
-;
-
-COMMENT ON COLUMN  producto_pedidoproveedor.K_IDREFERENCIAUNICA IS 'K_IDREFERENCIAUNICA: Describe el identificador para la tabla producto, se usa como FK.'
-;
-
-COMMENT ON COLUMN  producto_pedidoproveedor.K_IDPEDIDOPROVEEDOR IS 'K_IDPEDIDOPROVEEDOR: Describe el identificador para la tabla pedido_proveedor, se usa como FK.'
-;
-
-COMMENT ON TABLE  producto_proveedor IS 'Asocia los productos que puede suministrar un proveedor en determinada ciudad'
-;
-
-COMMENT ON COLUMN  producto_proveedor.K_IDREFERENCIAUNICA IS 'Identificador del producto'
-;
-
-COMMENT ON COLUMN  producto_proveedor.K_IDPROVEEDOR IS 'Identificador del proveedor'
-;
-
-COMMENT ON COLUMN  producto_proveedor.K_IDCIUDAD IS 'Identificador de la ciudad'
 ;
 
 COMMENT ON TABLE  proveedor IS 'Entidad encargada de registrar los proveedores que suministran productos a la tienda'
@@ -312,20 +286,5 @@ COMMENT ON COLUMN  tarjeta_credito.F_FECHAVENCIMIENTO IS 'fecha de vencimiento a
 COMMENT ON COLUMN  tarjeta_credito.Q_NUMEROTARJETA IS 'numero personal de la tarjeta de credito asignado por el banco'
 ;
 
-COMMENT ON COLUMN  tarjeta_credito.Q_CCV IS 'codigo de verificacion de tarjeta '
-;
-
 COMMENT ON COLUMN  tarjeta_credito.N_NOMBREDUENO IS 'nombre del dueï¿½o asociado a la tarjeta por el banco'
-;
-
-COMMENT ON COLUMN  PRODUCTO.K_IDREFERENCIAUNICA IS 'Numero de referencia que identifica a un producto'
-;
-
-COMMENT ON COLUMN  CATEGORIA.K_IDCATEGORIA IS 'Identificador de la categorÃ­a'
-;
-
-COMMENT ON COLUMN  PEDIDO_PROVEEDOR.K_IDPEDIDOPROVEEDOR IS 'Identificador del pedido proveedor'
-;
-
-COMMENT ON COLUMN  CIUDAD.K_IDCIUDAD IS 'Identificador de la ciudad'
 ;
