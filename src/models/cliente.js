@@ -1,7 +1,8 @@
 class Cliente {
 
-    constructor(cedula, nombre, fechanac, genero, email){
-        this.cedula = cedula;
+    constructor(tipoident, numident, nombre, fechanac, genero, email){
+        this.tipoident = tipoident;
+        this.numident = numident;
         this.nombre = nombre;
         this.fechanac = fechanac;
         this.genero = genero;

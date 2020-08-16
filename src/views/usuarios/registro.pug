@@ -9,11 +9,21 @@ block content
           form(action='registrar')
 
             div(class="row")
-          
+
               div(class='col-12 col-md-6')
                 div(class='form-group')
-                  label(for='cedula') Cedula
-                  input(type='text' id='cedula' name='cedula' class='form-control')
+                  label(for='tipoident') Tipo de identificación
+                  select(id='tipoident' name='tipoident' class='form-control')
+                    option(value='CC') CEDULA DE CIUDADANIA
+                    option(value='TI') TARJETA DE IDENTIDAD
+                    option(value='RC') RC
+                    option(value='CE') CE
+                    option(value='PA') PASAPORTE
+                    
+              div(class='col-12 col-md-6')
+                div(class='form-group')
+                  label(for='numident') Numero de identificación
+                  input(type='text' id='numident' name='numident' class='form-control')
             
             div(class="row")
 
@@ -32,7 +42,9 @@ block content
               div(class='col-12 col-md-4')
                 div(class='form-group')
                   label(for='genero') Genero
-                  input(type='text' id='genero' name='genero' class='form-control')
+                  select(id='genero' name='genero' class='form-control')
+                    option(value='M') MASCULINO
+                    option(value='F') FEMENINO
             
               div(class='col-12 col-md-8')
                 div(class='form-group')

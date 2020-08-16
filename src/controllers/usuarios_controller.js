@@ -16,7 +16,7 @@ const crear = async (req, res) => {
         user = {username: 'admusrrfs', password: 'secreta'};
     }
 
-    const {cedula, nombre, fechanac, genero, email, usern, psswd} = req.body;
+    const {tipoident, numident, nombre, fechanac, genero, email, usern, psswd} = req.body;
 
     let usuario = new modelUsuario.Usuario(usern, psswd);
     const usuariodao = new usuarioDAO.UsuarioDAO(user);
@@ -24,7 +24,7 @@ const crear = async (req, res) => {
     let result = await usuariodao.registrar(usuario);
 
     if( !result.exe.errorNum ){
-        let cliente = new modelCliente.Cliente(cedula, nombre, fechanac, genero, email);
+        let cliente = new modelCliente.Cliente(tipoident , numident, nombre, fechanac, genero, email);
         cliente.usuario = usern;
         const clientedao = new clienteDAO.ClienteDAO(user);
         result = await clientedao.registrar(cliente);
@@ -57,7 +57,9 @@ const login = async (req, res) => {
             result.exe.rows[0][2], 
             result.exe.rows[0][3], 
             result.exe.rows[0][4], 
-            result.exe.rows[0][5]);
+            result.exe.rows[0][5],
+            result.exe.rows[0][6],
+            result.exe.rows[0][7]);
         req.session.usuario.cliente.id = result.exe.rows[0][0];
     }
 

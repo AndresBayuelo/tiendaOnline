@@ -10,9 +10,9 @@ class ClienteDAO {
 
         const sentencia = async function(conexion){
             return await conexion.execute(
-                `INSERT INTO cli (k_cedula, n_nombre, f_fechanacimiento, i_genero, o_email, n_nombreusuario) 
-                VALUES (:cedula, :nombre, TO_DATE(:fecnac, 'YYYY-MM-DD'), :genero, :mail, :nusuario)`,
-                [cliente.cedula, cliente.nombre, cliente.fechanac, cliente.genero, cliente.email, cliente.usuario],
+                `INSERT INTO cli (i_tipoident, k_numident, n_nombre, f_fechanacimiento, i_genero, o_email, n_nombreusuario) 
+                VALUES (:tipoident, :numident, :nombre, TO_DATE(:fecnac, 'YYYY-MM-DD'), :genero, :mail, :nusuario)`,
+                [cliente.tipoident, cliente.numident, cliente.nombre, cliente.fechanac, cliente.genero, cliente.email, cliente.usuario],
                 { autoCommit: true }
             );
         };
@@ -27,7 +27,7 @@ class ClienteDAO {
 
         const sentencia = async function(conexion){
             return await conexion.execute(
-                `SELECT k_idcliente, k_cedula, n_nombre, f_fechanacimiento, i_genero, o_email
+                `SELECT k_idcliente, k_numident, i_tipoident, n_nombre, f_fechanacimiento, i_genero, o_email
                 FROM cli WHERE n_nombreusuario = :nusuario`,
                 [nusuario]
             );
