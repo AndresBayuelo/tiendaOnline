@@ -7,7 +7,7 @@ const listarCiudades = async (req, res) => {
     if(req.session.usuario)
         credenciales = req.session.usuario;
     else
-        credenciales = {username: 'userclisrrfs', password: 'secreta'};
+        credenciales = {username: 'clisrrfs', password: 'secreta'};
 
     const ciudaddao = new ciudadDAO.CiudadDAO(credenciales);
 

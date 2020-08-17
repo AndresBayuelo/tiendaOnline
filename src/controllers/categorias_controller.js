@@ -7,7 +7,7 @@ const listarCategorias = async (req, res) => {
     if(req.session.usuario)
         credenciales = req.session.usuario;
     else
-        credenciales = {username: 'userclisrrfs', password: 'secreta'};
+        credenciales = {username: 'clisrrfs', password: 'secreta'};
 
     const categoriadao = new categoriaDAO.CategoriaDAO(credenciales);
 
@@ -21,7 +21,7 @@ const listarCategorias = async (req, res) => {
             categoria.id = result.exe.rows[i][0];
             if(result.exe.rows[i][2]){
                 for(let j=0; j<categorias.length; j++){
-                    if(categorias[j].id = result.exe.rows[i][2]){
+                    if(categorias[j].id == result.exe.rows[i][2]){
                         if(!categorias[j].categorias){
                             categorias[j].categorias = []
                         }

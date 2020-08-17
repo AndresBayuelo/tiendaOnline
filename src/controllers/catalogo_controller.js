@@ -7,7 +7,7 @@ const consultarProductosCiudad = async (req, res) => {
     if(req.session.usuario)
         credenciales = req.session.usuario;
     else
-        credenciales = {username: 'userclisrrfs', password: 'secreta'};
+        credenciales = {username: 'clisrrfs', password: 'secreta'};
 
     const productodao = new productoDAO.ProductoDAO(credenciales);
 
@@ -27,7 +27,7 @@ const consultarProductosCriterios = async (req, res) => {
     if(req.session.usuario)
         credenciales = req.session.usuario;
     else
-        credenciales = {username: 'userclisrrfs', password: 'secreta'};
+        credenciales = {username: 'clisrrfs', password: 'secreta'};
 
     const {ciudad, producto, categoria, criterioOrden} = req.query;
 
