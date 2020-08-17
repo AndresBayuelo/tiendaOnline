@@ -50,17 +50,19 @@ const login = async (req, res) => {
     const clientedao = new clienteDAO.ClienteDAO(usuario);
     let result = await clientedao.consultarClienteUsuario();
 
-    if(result.exe.rows){
+    if( !result.exe.errorNum ){
         req.session.usuario = usuario;
-        req.session.usuario.cliente = new modelCliente.Cliente(
-            result.exe.rows[0][1], 
-            result.exe.rows[0][2], 
-            result.exe.rows[0][3], 
-            result.exe.rows[0][4], 
-            result.exe.rows[0][5],
-            result.exe.rows[0][6],
-            result.exe.rows[0][7]);
-        req.session.usuario.cliente.id = result.exe.rows[0][0];
+        if(result.exe.rows.lenght){
+            req.session.usuario.cliente = new modelCliente.Cliente(
+                result.exe.rows[0][1], 
+                result.exe.rows[0][2], 
+                result.exe.rows[0][3], 
+                result.exe.rows[0][4], 
+                result.exe.rows[0][5],
+                result.exe.rows[0][6],
+                result.exe.rows[0][7]);
+            req.session.usuario.cliente.id = result.exe.rows[0][0];
+        }
     }
 
     console.log(result);
