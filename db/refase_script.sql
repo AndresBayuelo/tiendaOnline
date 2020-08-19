@@ -57,7 +57,7 @@ CREATE TABLE  direccion
 (
 	K_IDDIRECCION NUMBER(10) NOT NULL,    -- Identificador unico de la direccion de entrega del pedido 
 	N_DIRECCION VARCHAR(50) NOT NULL,    -- registro de la direccion de la entrega 
-	Q_TELEFONO NUMBER(8,2) NOT NULL,    -- telefono de contacto asociado al domicilio de la entrega del pedido
+	Q_TELEFONO NUMBER(10) NOT NULL,    -- telefono de contacto asociado al domicilio de la entrega del pedido
 	K_IDCIUDAD NUMBER(10) NOT NULL
 )
 ;
@@ -76,6 +76,16 @@ CREATE TABLE  inventario_proveedor
 (
 	K_IDINVENTARIO NUMBER(10) NOT NULL,    -- Identificador del producto
 	K_IDPROVEEDOR NUMBER(10) NOT NULL    -- Identificador del proveedor
+)
+;
+
+CREATE TABLE  log
+(
+	K_IDLOG NUMBER(10) NOT NULL,
+	N_NOMBREUSUARIO VARCHAR(50) NOT NULL,
+	F_FECHA DATE NOT NULL,
+	I_ACCION VARCHAR(6) NOT NULL,
+	T_DESCRIPCION BLOB NOT NULL
 )
 ;
 
@@ -314,6 +324,16 @@ CREATE INDEX IXFK_INVPRO_PROVEEDOR
 
 CREATE INDEX IXFK_INVPROV_INVENTARIO   
  ON  inventario_proveedor (K_IDINVENTARIO) 
+;
+
+ALTER TABLE  log 
+ ADD CONSTRAINT PK_LOG
+	PRIMARY KEY (K_IDLOG) 
+ USING INDEX
+;
+
+ALTER TABLE  log 
+ ADD CONSTRAINT CK_LOG_IACCION CHECK (I_ACCION IN ('INSERT','UPDATE','DELETE'))
 ;
 
 ALTER TABLE  pago 
