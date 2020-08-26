@@ -52,7 +52,7 @@ const login = async (req, res) => {
 
     if( !result.exe.errorNum ){
         req.session.usuario = usuario;
-        if(result.exe.rows.lenght){
+        if(result.exe.rows.length){
             req.session.usuario.cliente = new modelCliente.Cliente(
                 result.exe.rows[0][1], 
                 result.exe.rows[0][2], 
