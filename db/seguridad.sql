@@ -118,6 +118,8 @@ GRANT SELECT ON clitar TO clirrfs;
 GRANT SELECT ON costoe TO clirrfs;
 GRANT SELECT ON dir TO clirrfs;
 GRANT SELECT ON inv TO clirrfs;
+GRANT SELECT ON invprov TO clirrfs;
+GRANT SELECT ON prov TO clirrfs;
 GRANT SELECT ON pg TO clirrfs;
 GRANT SELECT ON pgpse TO clirrfs;
 GRANT SELECT ON pgtar TO clirrfs;
@@ -165,6 +167,8 @@ GRANT SELECT ON ctg TO clisrrfs;
 GRANT SELECT ON ciu TO clisrrfs;
 GRANT SELECT ON costoe TO clisrrfs;
 GRANT SELECT ON inv TO clisrrfs;
+GRANT SELECT ON invprov TO clisrrfs;
+GRANT SELECT ON prov TO clisrrfs;
 GRANT SELECT ON prod TO clisrrfs;
 
 SELECT * FROM DBA_ROLES; -- muestra los roles

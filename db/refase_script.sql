@@ -138,7 +138,7 @@ CREATE TABLE  pedido_cliente
 	Q_NUMEROPRODUCTOS NUMBER(3) NOT NULL,    -- Cantidad de productos en el pedido del cliente
 	F_FECHAENTREGA DATE NULL,    -- Fecha en que el pedido lleg� al domicilio de cliente
 	K_IDCLIENTE NUMBER(8) NOT NULL,    -- Identificador unico del cliente
-	V_COSTOENVIO NUMBER(10,2) NOT NULL,    -- Costo adicional de transporte para garantizar la entrega del pedido al domicilio del cliente
+	V_COSTOENVIO NUMBER(10,2) NULL,    -- Costo adicional de transporte para garantizar la entrega del pedido al domicilio del cliente
 	V_VALORTOTAL NUMBER(10,2) NOT NULL,    -- Costo total del pedido, relacionando costo de los productos, impuestos, env�o y descuentos si aplica
 	V_IVA NUMBER(10,2) NOT NULL    -- Impuesto de valor agregado
 )
