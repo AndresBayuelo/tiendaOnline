@@ -1,0 +1,55 @@
+extends ../layout
+
+block content
+  div(class='row align-items-center justify-content-sm-center h-100')
+    div(class='col-12 col-sm-10 col-md-9 col-lg-8')
+      div(class='card')
+        h5(class='card-header') Nuevo producto
+        div(class='card-body')
+          form(action='registrarProducto')
+
+            div(class="row")
+           
+              div(class='col-12 col-md-6')
+                div(class='form-group')
+                  label(for='ref') Referencia
+                  input(type='text' id='ref' name='ref' class='form-control')
+            
+            div(class="row")
+
+              div(class='col-12 col-md-6')
+                div(class='form-group')
+                  label(for='nombre') Nombre
+                  input(type='text' id='nombre' name='nombre' class='form-control')
+          
+              div(class='col-12 col-md-6')
+                div(class='form-group')
+                  label(for='marca') Marca
+                  input(type='text' id='marca' name='marca' class='form-control')
+
+            div(class="row")    
+
+              div(class='col-12 col-md-6')
+                div(class='form-group')
+                  label(for='ctg') Categoría
+                  select(id='ctg' name='ctg' class='form-control')
+            
+              div(class='col-12 col-md-6')
+                div(class='form-group')
+                  label(for='unidmed') Unidad Medida
+                  input(type='unidmed' id='unidmed' name='unidmed' class='form-control')
+
+            div(class="row")
+            
+              div(class='col-12 col-md-6')
+                div(class='form-group')
+                  label(for='img') Imagen
+                  input(type='file' id='img' name='img' class='form-control-file')
+
+            div(class="row")
+
+              div(class='col-12 text-right')
+                button(type="submit" class="btn btn-primary" id="registrar") Registrar
+              
+block scripts
+  script(src='/scripts/catalogo/registroproducto.js')

@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+  div(class='row align-items-center justify-content-sm-center h-100')
+    
+    div(class="col-12")
+
+      div(aria-live="polite" aria-atomic="true" style="position: relative; z-index:999999;" class="msgs")
+
+      div(class="row justify-content-sm-center")
+        div(class="card mt-3")
+          div(class="card-body justify-content-sm-center")
+            h5(class="card-title") Filtros
+            form(action='#' class="form-inline")
+              label(class="my-1 mr-2" for="ciudad") Ciudad
+              select(class="custom-select my-1 mr-sm-2 mb-2" id="ciudad" name="ciudad")
+                option(value='' disabled='' selected='') Elegir...
+              label(class="my-1 mr-2" for="categoria") Categoría
+              select(class="custom-select my-1 mr-sm-2 mb-2" id="categoria" name="categoria")
+                option(value='' disabled='' selected='') Elegir...
+              div(class="form-group mb-2")
+                div(class="custom-control custom-radio custom-control-inline")
+                  input(type="radio" id="customRadioInline1" name="criterioOrden" class="custom-control-input" value="nombre")
+                  label(class="custom-control-label" for="customRadioInline1") Nombre
+                div(class="custom-control custom-radio custom-control-inline")
+                  input(type="radio" id="customRadioInline2" name="criterioOrden" class="custom-control-input" value="marca")
+                  label(class="custom-control-label" for="customRadioInline2") Marca
+                div(class="custom-control custom-radio custom-control-inline")
+                  input(type="radio" id="customRadioInline3" name="criterioOrden" class="custom-control-input" value="precio")
+                  label(class="custom-control-label" for="customRadioInline3") Precio
+              input(type="search" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Criterio búsqueda" name="producto")
+              button(type="submit" class="btn btn-primary mb-2" id="buscar") Buscar
+
+    div(class="col-12")
+      div(class="row row-cols-1 row-cols-lg-2 row-cols-xl-3" id="items")
+        //div(class="col mt-4")
+          div(class="card")
+            img(src="/img/upload/prod/10101.jpg" class="card-img-top mx-auto d-block" alt="..." style="height: 250px; width:auto;")
+            div(class="card-body")
+              h5(class="card-title") Leche
+            ul(class="list-group list-group-flush")
+              li(class="list-group-item")
+                p(class="card-text") REF 10101, Marca Klim, Unidad de medida Litros
+              li(class="list-group-item")
+                  div(class="form-group row")
+                    label(for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm") Cantidad
+                    div(class="col-sm-8")
+                      input(type="number" class="form-control form-control-sm" id="colFormLabelSm" value="10" disabled)
+                  div(class="form-group row")
+                    label(for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm") Valor
+                    div(class="col-sm-8")
+                      input(type="number" class="form-control form-control-sm" id="colFormLabelSm" value="1000" disabled)
+              li(class="list-group-item")   
+                form(action='#')
+                  div(class="form-group row")
+                    label(for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm") Cantidad
+                    div(class="col-sm-8")
+                      input(type="number" class="form-control form-control-sm" id="colFormLabelSm" value="1")
+                  div(class="form-group row")
+                    div(class="col-sm-12 text-right")
+                      a(href="#" class="card-link") Agregar
+
+block scripts
+  script(src='/scripts/catalogo/venta.js')

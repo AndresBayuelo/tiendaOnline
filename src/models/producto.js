@@ -1,5 +1,6 @@
 class Producto{
-    constructor(nombre, marca, categoria, medida, imagen){
+    constructor(referencia, nombre, marca, categoria, medida, imagen){
+        this.referencia = referencia;
         this.nombre = nombre;
         this.marca = marca;
         this.categoria = categoria;
